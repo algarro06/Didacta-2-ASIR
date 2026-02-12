@@ -15,6 +15,9 @@ session_destroy();
 
 foreach ($_COOKIE as $key => $value) {
     setcookie($key, '', time() - 3600, "/");
+    if (isset($params)) {
+        setcookie($key, '', time() - 3600, $params["path"], $params["domain"]);
+    }
 }
 
 header("Location: login.php");
