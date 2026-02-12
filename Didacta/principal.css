@@ -1,0 +1,82 @@
+body {
+  padding: 0px;
+  background: white;
+  background-size: cover;
+}
+
+.titulo {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #111;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.titulo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 45%;
+  height: 4px;
+  background-color: #111;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #animacion {
+    animation: fadeUp 0.6s ease-out both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+.linea {
+  border: none;
+  height: 3px;
+  background: linear-gradient(to right, #111, rgba(17,17,17,0.6), rgba(17,17,17,0.2));
+  border-radius: 2px;
+  margin: 2rem 0;
+}
+
+.menu {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.menu-item a {
+  font-weight: 600;              
+  letter-spacing: -0.01em;       
+  color: #111;
+  text-decoration: none;
+  position: relative;
+}
+
+.menu-item a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #111;
+  opacity: 0.8;
+  transition: width 0.25s ease;
+}
+
+.menu-item a:hover::after { width: 100%; }
+
+.subtitulo {
+  font-size: clamp(1.2rem, 3vw, 0.5rem);
+  color: #111;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+}
+
