@@ -17,7 +17,7 @@
         <div style="background:#f8d7da; color:#721c24; padding:12px; border-radius:8px; margin-bottom:20px;">
             <ul style="margin:0; padding-left:18px;">
                 @foreach ($errors->all() as $error)
-                    <li>⚠️ {{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -59,14 +59,14 @@
                style="width:100%; margin-bottom:25px; padding:10px; border-radius:8px; border:1px solid #ccc;">
 
         <button type="submit" class="admin-btn" style="padding:10px 20px;">
-            💾 Guardar cambios
+            Guardar cambios
         </button>
         <div style="margin-top:30px;">
         <a href="{{ url('/admin/users/') }}"
            style="display:inline-block; background:#6c757d; color:white;
                   padding:12px 24px; border-radius:6px; font-size:1rem;
                   font-weight:bold; text-decoration:none;">
-            ✖ Cancelar
+            Cancelar
         </a>
     </div>
 </form>

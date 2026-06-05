@@ -36,7 +36,7 @@
                     <a href="{{ route('admin.users.edit', $u->id_user) }}"
                        class="admin-btn"
                        style="padding:8px 14px;">
-                        ✏️ Editar
+                        Editar
                     </a>
 
                     <form method="POST"
@@ -62,7 +62,7 @@
            style="display:inline-block; background:#6c757d; color:white;
                   padding:12px 24px; border-radius:6px; font-size:1rem;
                   font-weight:bold; text-decoration:none;">
-            ✖ Cancelar
+            Cancelar
         </a>
     </div>
 

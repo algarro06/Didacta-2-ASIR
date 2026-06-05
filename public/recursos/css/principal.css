@@ -1581,54 +1581,54 @@ body.dark-mode .events-page b {
    🌙 MODO OSCURO — CREAR NUEVO CURSO
    ============================ */
 
-.dark-mode {
+body.dark-mode {
     background: #121212 !important;
     color: #e5e5e5 !important;
 }
 
 /* Header */
-.dark-mode .page-crear-header {
+body.dark-mode .page-crear-header {
     background: #1e1e1e !important;
-    color: #fff !important;
+    color: #ffffff !important;
 }
 
 /* Wrapper */
-.dark-mode .page-crear-wrapper {
+body.dark-mode .page-crear-wrapper {
     background: #1a1a1a !important;
     border: 1px solid #333 !important;
-    border-radius: 10px;
+    border-radius: 10px !important;
 }
 
 /* Labels */
-.dark-mode .label-crear-curso {
+body.dark-mode .label-crear-curso {
     color: #e5e5e5 !important;
 }
 
 /* Inputs */
-.dark-mode .input-crear-curso {
+body.dark-mode .input-crear-curso {
     background: #222 !important;
     color: #fff !important;
-    border: 1px solid #444 !important;
+    border-color: #444 !important;
 }
 
-.dark-mode .input-crear-curso::placeholder {
+body.dark-mode .input-crear-curso::placeholder {
     color: #aaa !important;
 }
 
 /* Botón crear */
-.dark-mode .btn-crear-curso {
+body.dark-mode .btn-crear-curso {
     background: #2d4a7a !important;
     color: #fff !important;
 }
 
 /* Botón cancelar */
-.dark-mode .btn-cancelar-curso {
+body.dark-mode .btn-cancelar-curso {
     background: #555 !important;
     color: #fff !important;
 }
 
 /* Alertas */
-.dark-mode .alert-crear-curso {
+body.dark-mode .alert-crear-curso {
     background: #5c1f1f !important;
     color: #ffb3b3 !important;
     border: 1px solid #7a2a2a !important;
