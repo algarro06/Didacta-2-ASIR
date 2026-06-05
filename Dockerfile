@@ -43,4 +43,10 @@ RUN sed -i 's#/var/www/html#/var/www/html/public#g' \
 
 EXPOSE 80
 
-CMD ["sh", "deploy.sh"]
+# Asegurar permisos correctos antes de arrancar
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+EXPOSE 80
+
+# Comando de arranque único y directo en línea
+CMD php artisan key:generate --force && php artisan config:cache && php artisan route:cache && php artisan migrate:fresh --seed --force && apache2-foreground
