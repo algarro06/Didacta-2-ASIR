@@ -1,26 +1,26 @@
 @include('includes.header')
 <link rel="stylesheet" href="{{ asset('recursos/css/principal.css') }}">
 
-<div class="curso-header dark-section">
+<div class="curso-header page-alumnos-header">
     <h1>Alumnos — {{ ucfirst($course->title) }}</h1>
 </div>
 
-<div class="curso-wrapper dark-box">
+<div class="curso-wrapper page-alumnos-wrapper">
 
     @if(session('success'))
-        <div class="dark-alert"
+        <div class="alert-success-curso"
              style="background:#d4edda; color:#155724; padding:10px;
                     border-radius:6px; margin-bottom:15px;">
             {{ session('success') }}
         </div>
     @endif
 
-    <h2 class="dark-text">Alumnos matriculados</h2>
+    <h2>Alumnos matriculados</h2>
 
     @if($enrolled->isEmpty())
-        <p class="dark-text">No hay alumnos matriculados en este curso todavía.</p>
+        <p>No hay alumnos matriculados en este curso todavía.</p>
     @else
-        <table class="dark-table"
+        <table class="tabla-alumnos"
                style="width:100%; border-collapse:collapse; margin-bottom:30px;">
             <thead>
                 <tr style="background:#f0f0f0;">
@@ -33,16 +33,16 @@
             <tbody>
                 @foreach($enrolled as $student)
                 <tr>
-                    <td style="padding:10px; border:1px solid #ccc;" class="dark-text">{{ $student->name }}</td>
-                    <td style="padding:10px; border:1px solid #ccc;" class="dark-text">{{ $student->surname }}</td>
-                    <td style="padding:10px; border:1px solid #ccc;" class="dark-text">{{ $student->mail }}</td>
+                    <td style="padding:10px; border:1px solid #ccc;">{{ $student->name }}</td>
+                    <td style="padding:10px; border:1px solid #ccc;">{{ $student->surname }}</td>
+                    <td style="padding:10px; border:1px solid #ccc;">{{ $student->mail }}</td>
                     <td style="padding:10px; border:1px solid #ccc; text-align:center;">
                         <form method="POST"
                               action="{{ route('courses.remove', [$course->view_name, $student->id_user]) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                    class="dark-btn"
+                                    class="btn-eliminar-alumno"
                                     style="background:#dc3545; color:white; border:none;
                                            padding:6px 14px; border-radius:4px; cursor:pointer;"
                                     onclick="return confirm('¿Seguro que quieres eliminar a este alumno del curso?')">
@@ -56,17 +56,17 @@
         </table>
     @endif
 
-    <h2 class="dark-text">Añadir alumno al curso</h2>
+    <h2>Añadir alumno al curso</h2>
 
     @if($available->isEmpty())
-        <p class="dark-text">No hay más alumnos disponibles para añadir.</p>
+        <p>No hay más alumnos disponibles para añadir.</p>
     @else
         <form method="POST"
               action="{{ route('courses.enroll', $course->view_name) }}"
               style="display:flex; gap:10px; align-items:center; margin-top:10px;">
             @csrf
             <select name="user_id"
-                    class="dark-input"
+                    class="select-alumno"
                     style="padding:8px; border-radius:4px; border:1px solid #ccc; min-width:250px;">
                 @foreach($available as $student)
                     <option value="{{ $student->id_user }}">
@@ -75,7 +75,7 @@
                 @endforeach
             </select>
             <button type="submit"
-                    class="dark-btn"
+                    class="btn-anadir-alumno"
                     style="background:#28a745; color:white; border:none;
                            padding:8px 18px; border-radius:4px; cursor:pointer;">
                 Añadir
@@ -85,7 +85,7 @@
 
     <div style="margin-bottom:20px; margin-top:20px;">
         <a href="{{ route('courses.show', $course->view_name) }}"
-           class="dark-btn"
+           class="btn-volver-curso"
            style="display:inline-block; background:#6c757d; color:white; padding:8px 18px;
                   border-radius:6px; text-decoration:none; font-weight:bold;">
             ← Volver al curso
