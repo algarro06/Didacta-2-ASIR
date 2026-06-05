@@ -1576,3 +1576,369 @@ body.dark-mode .events-page b {
     border: 1px solid rgba(255,255,255,0.08);
     color: white;
 }
+
+/* ============================
+   🌙 MODO OSCURO PARA CREAR CURSO
+   ============================ */
+
+/* Fondo general */
+.dark-mode {
+    background: #121212 !important;
+    color: #e5e5e5 !important;
+}
+
+/* Título */
+.dark-mode .curso-header h1 {
+    color: #ffffff !important;
+}
+
+/* Caja principal */
+.dark-mode .curso-wrapper {
+    background: #1a1a1a !important;
+    border: 1px solid #333 !important;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Inputs y textarea */
+.dark-mode input[type="text"],
+.dark-mode input[type="file"],
+.dark-mode textarea {
+    background: #222 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+    color: #aaa !important;
+}
+
+/* Labels */
+.dark-mode label {
+    color: #e5e5e5 !important;
+}
+
+/* Botón principal */
+.dark-mode button[type="submit"] {
+    background: #2d4a7a !important;
+    color: #fff !important;
+}
+
+/* Botón cancelar */
+.dark-mode a[href="/home"] {
+    background: #555 !important;
+    color: #fff !important;
+}
+
+/* Alertas */
+.dark-mode .alert-error {
+    background: #5c1f1f !important;
+    color: #ffb3b3 !important;
+    border: 1px solid #7a2a2a !important;
+}
+
+/* ============================
+   🌙 MODO OSCURO PARA EDITAR ITEM
+   ============================ */
+
+.dark-mode {
+    background: #121212 !important;
+    color: #e5e5e5 !important;
+}
+
+/* Header */
+.dark-mode .curso-header h1 {
+    color: #fff !important;
+}
+
+/* Caja principal */
+.dark-mode .curso-wrapper {
+    background: #1a1a1a !important;
+    border: 1px solid #333 !important;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Labels */
+.dark-mode .dark-label {
+    color: #e5e5e5 !important;
+}
+
+/* Inputs, textarea, date, file */
+.dark-mode .dark-input {
+    background: #222 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+.dark-mode .dark-input::placeholder {
+    color: #aaa !important;
+}
+
+/* Texto secundario */
+.dark-mode .dark-text {
+    color: #bbb !important;
+}
+
+/* Enlaces */
+.dark-mode .dark-link {
+    color: #7aa7ff !important;
+}
+
+/* Botones */
+.dark-mode .dark-btn {
+    background: #2d4a7a !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.dark-mode a.dark-btn {
+    background: #555 !important;
+}
+
+/* Alertas */
+.dark-mode .dark-alert {
+    background: #5c1f1f !important;
+    color: #ffb3b3 !important;
+    border: 1px solid #7a2a2a !important;
+}
+
+/* ============================
+   🌙 MODO OSCURO – EDITAR CURSO
+   ============================ */
+
+.dark-mode {
+    background: #121212 !important;
+    color: #e5e5e5 !important;
+}
+
+/* Header */
+.dark-mode .curso-header h1 {
+    color: #fff !important;
+}
+
+/* Caja principal */
+.dark-mode .curso-wrapper {
+    background: #1a1a1a !important;
+    border: 1px solid #333 !important;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Labels */
+.dark-mode .dark-label {
+    color: #e5e5e5 !important;
+}
+
+/* Inputs, selects, textarea */
+.dark-mode .dark-input {
+    background: #222 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+.dark-mode .dark-input::placeholder {
+    color: #aaa !important;
+}
+
+/* Texto secundario */
+.dark-mode .dark-text {
+    color: #bbb !important;
+}
+
+/* Botones */
+.dark-mode .dark-btn {
+    background: #2d4a7a !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.dark-mode a.dark-btn {
+    background: #555 !important;
+}
+
+/* Alertas */
+.dark-mode .dark-alert {
+    background: #5c1f1f !important;
+    color: #ffb3b3 !important;
+    border: 1px solid #7a2a2a !important;
+}
+
+/* ============================
+   🌙 MODO OSCURO – CURSO HISTORIA
+   ============================ */
+
+.dark-mode .curso-header {
+    background: #1e1e1e !important;
+    color: #fff !important;
+}
+
+.dark-mode .curso-header p {
+    color: #ccc !important;
+}
+
+/* Caja principal */
+.dark-mode .curso-wrapper {
+    background: #1a1a1a !important;
+    border: 1px solid #333 !important;
+    border-radius: 10px;
+}
+
+/* Temas */
+.dark-mode .tema {
+    background: #1a1a1a !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.dark-mode .tema-titulo {
+    background: #2d4a7a !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+/* Contenido */
+.dark-mode .tema-contenido a {
+    color: #7aa7ff !important;
+}
+
+.dark-mode .dark-text {
+    color: #bbb !important;
+}
+
+/* Botones */
+.dark-mode .dark-btn {
+    background: #2d4a7a !important;
+    color: #fff !important;
+}
+
+.dark-mode .dark-delete {
+    color: #ff6b6b !important;
+}
+
+/* Alertas */
+.dark-mode .dark-alert {
+    background: #234d23 !important;
+    color: #b6ffb6 !important;
+    border: 1px solid #2f6b2f !important;
+}
+
+/* Modales */
+.dark-mode #modal-seccion > div,
+.dark-mode #modal-item > div {
+    background: #1e1e1e !important;
+    color: #fff !important;
+    border: 1px solid #333 !important;
+}
+
+.dark-mode #modal-seccion input,
+.dark-mode #modal-item input,
+.dark-mode #modal-item textarea {
+    background: #222 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+/* ============================
+   🌙 MODO OSCURO – LISTA DE CURSOS
+   ============================ */
+
+/* Fondo general */
+.dark-mode {
+    background: #121212 !important;
+    color: #e5e5e5 !important;
+}
+
+/* Header */
+.dark-mode .curso-header {
+    background: #1e1e1e !important;
+    color: #fff !important;
+}
+
+/* Caja principal */
+.dark-mode .curso-wrapper {
+    background: #1a1a1a !important;
+    border-radius: 10px;
+}
+
+/* Tarjetas de cursos */
+.dark-mode .curso-card {
+    background: #1a1a1a !important;
+    border: 1px solid #333 !important;
+}
+
+.dark-mode .curso-card h3,
+.dark-mode .curso-card p {
+    color: #ddd !important;
+}
+
+/* Botón */
+.dark-mode .dark-btn {
+    background: #2d4a7a !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+/* ============================
+   🌙 MODO OSCURO — ALUMNOS DEL CURSO
+   ============================ */
+
+/* Fondo general */
+.dark-mode {
+    background: #121212 !important;
+    color: #e5e5e5 !important;
+}
+
+/* Header */
+.dark-mode .curso-header {
+    background: #1e1e1e !important;
+    color: #fff !important;
+}
+
+/* Caja principal */
+.dark-mode .curso-wrapper {
+    background: #1a1a1a !important;
+    border-radius: 10px;
+    border: 1px solid #333 !important;
+}
+
+/* Textos */
+.dark-mode .dark-text {
+    color: #ddd !important;
+}
+
+/* Botones */
+.dark-mode .dark-btn {
+    background: #2d4a7a !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+/* Inputs y selects */
+.dark-mode .dark-input {
+    background: #222 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+/* Alertas */
+.dark-mode .dark-alert {
+    background: #234d23 !important;
+    color: #b6ffb6 !important;
+    border: 1px solid #2f6b2f !important;
+}
+
+/* Tabla */
+.dark-mode .dark-table th {
+    background: #2a2a2a !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+.dark-mode .dark-table td {
+    background: #1e1e1e !important;
+    color: #ddd !important;
+    border: 1px solid #444 !important;
+}

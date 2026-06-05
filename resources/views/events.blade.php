@@ -12,7 +12,7 @@
             <!-- SIDEBAR -->
             <div class="col-md-3 sidebar">
 
-                <h4>📌 Próximos eventos</h4>
+                <h4>Próximos eventos</h4>
 
                 @foreach($events as $event)
                     <div class="card mb-2 p-2 event-card"
@@ -25,9 +25,9 @@
                             🕒 {{ \Carbon\Carbon::parse($event->start_time)->format('d M H:i') }}
                         </small><br>
 
-                        <small>📌 {{ $event->type }}</small><br>
+                        <small>{{ $event->type }}</small><br>
 
-                        <small>📍 {{ $event->location }}</small>
+                        <small>{{ $event->location }}</small>
 
                     </div>
                 @endforeach
@@ -36,7 +36,7 @@
 
             <div class="col-md-6">
 
-                <h4>📅 Calendario</h4>
+                <h4>Calendario</h4>
 
                 @php
                     $days = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
@@ -82,7 +82,7 @@
 
                 <div class="card p-3 event-card" style="margin-top: 25px;">
 
-                    <h5>📌 Eventos del día</h5>
+                    <h5>Eventos del día</h5>
 
                     <div id="eventText">
                         Selecciona un día del calendario
@@ -94,7 +94,7 @@
 
             <div class="col-md-3">
 
-                <h4>📌 Detalles</h4>
+                <h4>Detalles</h4>
 
                 <div class="card p-3" id="eventInfo">
                     Selecciona un evento
@@ -143,11 +143,11 @@ function showDayEvents(date) {
 
                             <b>${event.title}</b><br>
 
-                            🕒 ${event.start_time}<br>
+                            ${event.start_time}<br>
 
-                            📌 ${event.type ?? ''}<br>
+                            ${event.type ?? ''}<br>
 
-                            📍 ${event.location ?? ''}
+                            ${event.location ?? ''}
 
                         </div>
                     `;
@@ -168,13 +168,13 @@ function showEvent(event) {
 
         <h5>${event.title}</h5>
 
-        <p>🕒 ${event.start_time}</p>
+        <p>${event.start_time}</p>
 
-        <p>📌 ${event.type ?? ''}</p>
+        <p>${event.type ?? ''}</p>
 
-        <p>📍 ${event.location ?? ''}</p>
+        <p>${event.location ?? ''}</p>
 
-        <p>👨‍🏫 ${event.instructor ?? ''}</p>
+        <p>${event.instructor ?? ''}</p>
 
         <p>${event.description ?? ''}</p>
     `;
@@ -193,7 +193,7 @@ function showEvent(event) {
                 text-decoration:none;
                 font-weight:600;
            ">
-            ✏️ Editar evento
+            Editar evento
         </a>
         `;
     }

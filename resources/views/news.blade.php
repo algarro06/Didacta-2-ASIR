@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('recursos/css/principal.css') }}">
 
 <div style="padding:20px;">
-    <h1>📰 Novedades y Noticias</h1>
+    <h1>Novedades y Noticias</h1>
 </div>
 
 <div id="tablon"></div>

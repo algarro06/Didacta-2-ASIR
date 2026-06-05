@@ -4,7 +4,7 @@
 <script src="{{ asset('recursos/js/principal.js') }}"></script>
 
 <div style="padding:20px;">
-    <h1>👥 Comunidad</h1>
+    <h1>Comunidad</h1>
     <p>Zona de interacción entre usuarios</p>
 </div>
 

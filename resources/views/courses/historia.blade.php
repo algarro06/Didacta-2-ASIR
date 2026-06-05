@@ -2,64 +2,72 @@
 <link rel="stylesheet" href="{{ asset('recursos/css/principal.css') }}">
 <script src="{{ asset('recursos/js/principal.js') }}"></script>
 
-<div class="curso-header">
+<div class="curso-header dark-section">
     <h1>Historia</h1>
-    <p>Bienvenido al curso de Historia</p>
+    <p class="dark-text">Bienvenido al curso de Historia</p>
 </div>
 
 @if(in_array(auth()->user()->id_role, [1, 2]))
     <div style="display:flex; justify-content:flex-end; gap:10px; padding:10px 20px;">
         <a href="{{ route('courses.students', 'historia') }}"
+           class="dark-btn"
            style="background:#4a6fa5; color:white; padding:8px 18px;
                   border-radius:6px; text-decoration:none; font-weight:bold;">
-            👥 Gestionar alumnos
+            Gestionar alumnos
         </a>
+
         <button onclick="document.getElementById('modal-seccion').style.display='flex'"
+                class="dark-btn"
                 style="background:#28a745; color:white; padding:8px 18px;
                        border-radius:6px; border:none; font-weight:bold; cursor:pointer;">
-            ➕ Añadir apartado
+            Añadir apartado
         </button>
     </div>
 @endif
 
 @if(session('success'))
-    <div style="background:#d4edda; color:#155724; padding:10px 20px;
+    <div class="dark-alert"
+         style="background:#d4edda; color:#155724; padding:10px 20px;
                 margin:0 20px 10px; border-radius:6px;">
-        ✅ {{ session('success') }}
+        {{ session('success') }}
     </div>
 @endif
 
-<div class="curso-wrapper">
+<div class="curso-wrapper dark-box">
     <div class="curso-temas">
 
         @forelse($course->sections as $section)
-            <div class="tema">
-                <button class="tema-titulo" onclick="toggleTema(this)">
-                    📂 {{ $section->title }} <span class="flecha">▲</span>
+            <div class="tema dark-box">
+                <button class="tema-titulo dark-btn" onclick="toggleTema(this)">
+                    {{ $section->title }} <span class="flecha">▲</span>
                 </button>
+
                 <div class="tema-contenido abierto">
                     @foreach($section->items as $item)
                         <div style="display:flex; align-items:center; gap:8px;">
+
                             @if($item->type === 'temario')
-                                <a href="{{ asset($item->file_path) }}" target="_blank">
+                                <a href="{{ asset($item->file_path) }}" target="_blank" class="dark-link">
                                     📄 {{ $item->title }}
                                 </a>
                             @else
-                                <a href="{{ route('items.task', $item->id_item) }}">
-                                    ✏️ {{ $item->title }}
+                                <a href="{{ route('items.task', $item->id_item) }}" class="dark-link">
+                                    {{ $item->title }}
                                     @if($item->due_date)
-                                        <span style="font-size:0.8rem; color:#888;">
+                                        <span class="dark-text" style="font-size:0.8rem;">
                                             (Entrega: {{ \Carbon\Carbon::parse($item->due_date)->format('d/m/Y') }})
                                         </span>
                                     @endif
                                 </a>
                             @endif
+
                             @if(in_array(auth()->user()->id_role, [1, 2]))
                                 <form method="POST" action="{{ route('items.destroy', $item->id_item) }}"
                                       style="display:inline; margin:0;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
+                                            class="dark-delete"
                                             style="background:none; border:none; color:#dc3545;
                                                    cursor:pointer; font-size:0.85rem;"
                                             onclick="return confirm('¿Eliminar este contenido?')">
@@ -69,23 +77,29 @@
                             @endif
                         </div>
                     @endforeach
+
                     @if(in_array(auth()->user()->id_role, [1, 2]))
                         <div style="display:flex; gap:8px; margin-top:12px;">
                             <button onclick="abrirModalItem({{ $section->id_section }}, 'temario')"
+                                    class="dark-btn"
                                     style="background:#4a6fa5; color:white; border:none;
                                            padding:5px 12px; border-radius:4px; cursor:pointer; font-size:0.85rem;">
-                                ➕ Temario
+                                Temario
                             </button>
+
                             <button onclick="abrirModalItem({{ $section->id_section }}, 'tarea')"
+                                    class="dark-btn"
                                     style="background:#fd7e14; color:white; border:none;
                                            padding:5px 12px; border-radius:4px; cursor:pointer; font-size:0.85rem;">
-                                ➕ Tarea
+                                Tarea
                             </button>
+
                             <form method="POST" action="{{ route('sections.destroy', $section->id_section) }}"
                                   style="margin:0;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
+                                        class="dark-btn"
                                         style="background:#dc3545; color:white; border:none;
                                                padding:5px 12px; border-radius:4px; cursor:pointer; font-size:0.85rem;"
                                         onclick="return confirm('¿Eliminar este apartado y todo su contenido?')">
@@ -97,33 +111,43 @@
                 </div>
             </div>
         @empty
-            <p style="padding:20px;">No hay apartados todavía.</p>
+            <p class="dark-text" style="padding:20px;">No hay apartados todavía.</p>
         @endforelse
 
     </div>
 </div>
 
 @if(in_array(auth()->user()->id_role, [1, 2]))
+<!-- MODAL NUEVA SECCIÓN -->
 <div id="modal-seccion"
+     class="dark-modal"
      style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
             background:rgba(0,0,0,0.5); z-index:9999;
             justify-content:center; align-items:center;">
-    <div style="background:white; border-radius:10px; padding:30px;
+    <div class="dark-box"
+         style="background:white; border-radius:10px; padding:30px;
                 width:100%; max-width:420px;">
-        <h2 style="margin-top:0;">➕ Nuevo apartado</h2>
+        <h2 class="dark-text" style="margin-top:0;">Nuevo apartado</h2>
+
         <form method="POST" action="{{ route('sections.store', $course->id_course) }}">
             @csrf
+
             <input type="text" name="title" placeholder="Nombre del apartado"
+                   class="dark-input"
                    style="width:100%; padding:10px; border:1px solid #ccc;
                           border-radius:6px; margin-bottom:15px; box-sizing:border-box;">
+
             <div style="display:flex; gap:10px; justify-content:flex-end;">
                 <button type="button"
                         onclick="document.getElementById('modal-seccion').style.display='none'"
+                        class="dark-btn"
                         style="background:#6c757d; color:white; border:none;
                                padding:10px 18px; border-radius:6px; cursor:pointer;">
                     Cancelar
                 </button>
+
                 <button type="submit"
+                        class="dark-btn"
                         style="background:#28a745; color:white; border:none;
                                padding:10px 18px; border-radius:6px; cursor:pointer; font-weight:bold;">
                     Crear
@@ -133,51 +157,68 @@
     </div>
 </div>
 
+<!-- MODAL NUEVO ITEM -->
 <div id="modal-item"
+     class="dark-modal"
      style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
             background:rgba(0,0,0,0.5); z-index:9999;
             justify-content:center; align-items:center;">
-    <div style="background:white; border-radius:10px; padding:30px;
+    <div class="dark-box"
+         style="background:white; border-radius:10px; padding:30px;
                 width:100%; max-width:480px; max-height:90vh; overflow-y:auto;">
-        <h2 style="margin-top:0;" id="modal-item-titulo">➕ Añadir contenido</h2>
+        <h2 id="modal-item-titulo" class="dark-text" style="margin-top:0;">Añadir contenido</h2>
+
         <form method="POST" id="form-item" action="" enctype="multipart/form-data"
               style="display:flex; flex-direction:column; gap:14px;">
             @csrf
+
             <input type="hidden" name="type" id="input-type">
+
             <div>
-                <label style="font-weight:bold;">Título</label>
+                <label class="dark-label" style="font-weight:bold;">Título</label>
                 <input type="text" name="title"
+                       class="dark-input"
                        style="width:100%; padding:10px; border:1px solid #ccc;
                               border-radius:6px; margin-top:6px; box-sizing:border-box;">
             </div>
+
             <div id="campos-tarea" style="display:none;">
                 <div>
-                    <label style="font-weight:bold;">Descripción</label>
+                    <label class="dark-label" style="font-weight:bold;">Descripción</label>
                     <textarea name="description" rows="3"
+                              class="dark-input"
                               style="width:100%; padding:10px; border:1px solid #ccc;
                                      border-radius:6px; margin-top:6px; box-sizing:border-box;"></textarea>
                 </div>
+
                 <div style="margin-top:10px;">
-                    <label style="font-weight:bold;">Fecha de entrega</label>
+                    <label class="dark-label" style="font-weight:bold;">Fecha de entrega</label>
                     <input type="date" name="due_date"
+                           class="dark-input"
                            style="width:100%; padding:10px; border:1px solid #ccc;
                                   border-radius:6px; margin-top:6px; box-sizing:border-box;">
                 </div>
             </div>
+
             <div id="campos-temario" style="display:none;">
-                <label style="font-weight:bold;">PDF a subir</label>
+                <label class="dark-label" style="font-weight:bold;">PDF a subir</label>
                 <input type="file" name="file" accept=".pdf"
+                       class="dark-input"
                        style="width:100%; padding:10px; border:1px solid #ccc;
                               border-radius:6px; margin-top:6px; box-sizing:border-box;">
             </div>
+
             <div style="display:flex; gap:10px; justify-content:flex-end;">
                 <button type="button"
                         onclick="document.getElementById('modal-item').style.display='none'"
+                        class="dark-btn"
                         style="background:#6c757d; color:white; border:none;
                                padding:10px 18px; border-radius:6px; cursor:pointer;">
                     Cancelar
                 </button>
+
                 <button type="submit"
+                        class="dark-btn"
                         style="background:#4a6fa5; color:white; border:none;
                                padding:10px 18px; border-radius:6px; cursor:pointer; font-weight:bold;">
                     Guardar
@@ -210,11 +251,11 @@ function abrirModalItem(sectionId, tipo) {
     inputType.value = tipo;
 
     if (tipo === 'tarea') {
-        titulo.textContent = '✏️ Nueva tarea';
+        titulo.textContent = 'Nueva tarea';
         camposTarea.style.display = 'block';
         camposTemario.style.display = 'none';
     } else {
-        titulo.textContent = '📄 Nuevo temario';
+        titulo.textContent = 'Nuevo temario';
         camposTarea.style.display = 'none';
         camposTemario.style.display = 'block';
     }

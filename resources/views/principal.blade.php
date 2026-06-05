@@ -14,26 +14,26 @@
 
         @if(auth()->user()->id_role == 1)
             <a href="{{ route('admin.users.index') }}" class="admin-btn">
-                👤 Editar usuarios
+                Editar usuarios
             </a>
         @endif
 
         <a href="{{ route('courses.create') }}"
            style="background:#4a6fa5; color:white; padding:8px 18px;
                   border-radius:6px; text-decoration:none; font-weight:bold;">
-            ➕ Crear nuevo curso
+            Crear nuevo curso
         </a>
 
         <a href="{{ route('courses.edit', $courses->first()->id_course ?? 0) }}"
            style="background:#fd7e14; color:white; padding:8px 18px;
                   border-radius:6px; text-decoration:none; font-weight:bold;">
-            ✏️ Editar curso
+            Editar curso
         </a>
 
         <button onclick="document.getElementById('modal-eliminar').style.display='flex'"
                 style="background:#dc3545; color:white; padding:8px 18px;
                        border-radius:6px; border:none; font-weight:bold; cursor:pointer;">
-            🗑 Eliminar curso
+            Eliminar curso
         </button>
 
     </div>
@@ -42,7 +42,7 @@
 @if(session('success'))
     <div style="background:#d4edda; color:#155724; padding:10px 30px;
                 margin:10px 30px; border-radius:6px;">
-        ✅ {{ session('success') }}
+        {{ session('success') }}
     </div>
 @endif
 

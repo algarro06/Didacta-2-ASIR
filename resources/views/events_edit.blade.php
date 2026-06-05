@@ -11,7 +11,7 @@
         <div class="event-top-edit">
 
             <div>
-                <h1>✏️ Editar evento</h1>
+                <h1>Editar evento</h1>
                 <p>Modifica la información del evento</p>
             </div>
 
@@ -32,7 +32,7 @@
                     <div>
 
                         <div class="form-group-custom">
-                            <label>📌 Título del evento</label>
+                            <label>Título del evento</label>
                             <input type="text"
                                    name="title"
                                    class="form-control custom-input"
@@ -41,13 +41,13 @@
                         </div>
 
                         <div class="form-group-custom">
-                            <label>📝 Descripción</label>
+                            <label>Descripción</label>
                             <textarea name="description"
                                       class="form-control custom-input custom-textarea">{{ $event->description }}</textarea>
                         </div>
 
                         <div class="form-group-custom">
-                            <label>📚 Tipo de evento</label>
+                            <label>Tipo de evento</label>
 
                             <select name="type" class="form-control custom-input">
                                 <option value="">Selecciona un tipo</option>
@@ -64,7 +64,7 @@
                     <div>
 
                         <div class="form-group-custom">
-                            <label>📍 Ubicación</label>
+                            <label>Ubicación</label>
                             <input type="text"
                                    name="location"
                                    class="form-control custom-input"
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="form-group-custom">
-                            <label>👨‍🏫 Instructor</label>
+                            <label>Instructor</label>
                             <input type="text"
                                    name="instructor"
                                    class="form-control custom-input"
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="form-group-custom">
-                            <label>🎨 Color del evento</label>
+                            <label>Color del evento</label>
                             <input type="color"
                                    name="color"
                                    class="form-control color-picker"
@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="form-group-custom">
-                            <label>🕒 Fecha y hora</label>
+                            <label>Fecha y hora</label>
                             <input type="datetime-local"
                                    name="start_time"
                                    class="form-control custom-input"
@@ -106,7 +106,7 @@
                     </a>
 
                     <button type="submit" class="save-btn">
-                        💾 Guardar cambios
+                        Guardar cambios
                     </button>
 
                 </div>

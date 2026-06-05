@@ -5,7 +5,6 @@
         <h6 class="subtitulo animacion">Tu plataforma de recursos educativos</h6>
     </div>
 
-    <!-- 👤 USUARIO -->
     <div class="user-welcome animacion">
         ¡Bienvenido, {{ auth()->user()->name ?? 'Usuario' }}!
     </div>
@@ -14,7 +13,6 @@
         $current = request()->path();
     @endphp
 
-    <!-- 🔙 SOLO EN PÁGINAS INTERNAS -->
     @if (!str_contains($current, 'principal'))
         <div class="user-actions animacion">
             <a href="{{ url('/home') }}" class="back-btn">
@@ -27,7 +25,6 @@
 
 <hr class="linea animacion">
 
-<!-- 🔥 MENU + DARK MODE + ADMIN -->
 <div class="menu-wrapper animacion">
 
     <div class="menu">
@@ -48,17 +45,14 @@
         </article>
     </div>
 
-    <!-- 🌙 BOTÓNES DERECHA -->
     <div style="display: flex; align-items: center; gap: 10px;">
 
-        <!-- 🔐 BOTÓN ADMIN SOLO PROFESORES/ADMIN -->
         @if(auth()->check() && auth()->user()->id_role <= 2)
             <a href="{{ url('/admin/users/create') }}" class="admin-btn">
-                ➕ Usuarios
+                Usuarios
             </a>
         @endif
 
-        <!-- 🌙 DARK MODE -->
         <button id="theme-toggle" class="theme-btn">
             🌙
         </button>

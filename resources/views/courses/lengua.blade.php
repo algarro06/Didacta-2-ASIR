@@ -10,19 +10,19 @@
         <a href="{{ route('courses.students', 'lengua') }}"
            style="background:#4a6fa5; color:white; padding:8px 18px;
                   border-radius:6px; text-decoration:none; font-weight:bold;">
-            👥 Gestionar alumnos
+            Gestionar alumnos
         </a>
         <button onclick="document.getElementById('modal-seccion').style.display='flex'"
                 style="background:#28a745; color:white; padding:8px 18px;
                        border-radius:6px; border:none; font-weight:bold; cursor:pointer;">
-            ➕ Añadir apartado
+            Añadir apartado
         </button>
     </div>
 @endif
 @if(session('success'))
     <div style="background:#d4edda; color:#155724; padding:10px 20px;
                 margin:0 20px 10px; border-radius:6px;">
-        ✅ {{ session('success') }}
+        {{ session('success') }}
     </div>
 @endif
 <div class="curso-wrapper">
@@ -30,18 +30,18 @@
         @forelse($course->sections as $section)
             <div class="tema">
                 <button class="tema-titulo" onclick="toggleTema(this)">
-                    📂 {{ $section->title }} <span class="flecha">▲</span>
+                    {{ $section->title }} <span class="flecha">▲</span>
                 </button>
                 <div class="tema-contenido abierto">
                     @foreach($section->items as $item)
                         <div style="display:flex; align-items:center; gap:8px;">
                             @if($item->type === 'temario')
                                 <a href="{{ asset($item->file_path) }}" target="_blank">
-                                    📄 {{ $item->title }}
+                                    {{ $item->title }}
                                 </a>
                             @else
                                 <a href="{{ route('items.task', $item->id_item) }}">
-                                    ✏️ {{ $item->title }}
+                                    {{ $item->title }}
                                     @if($item->due_date)
                                         <span style="font-size:0.8rem; color:#888;">
                                             (Entrega: {{ \Carbon\Carbon::parse($item->due_date)->format('d/m/Y') }})
@@ -53,7 +53,6 @@
                                 <a href="{{ route('items.edit', $item->id_item) }}"
                                    style="background:none; border:none; color:#4a6fa5;
                                           cursor:pointer; font-size:0.85rem; text-decoration:none;">
-                                    ✏️
                                 </a>
                                 <form method="POST" action="{{ route('items.destroy', $item->id_item) }}"
                                       style="display:inline; margin:0;">
@@ -74,12 +73,12 @@
                             <button onclick="abrirModalItem({{ $section->id_section }}, 'temario')"
                                     style="background:#4a6fa5; color:white; border:none;
                                            padding:5px 12px; border-radius:4px; cursor:pointer; font-size:0.85rem;">
-                                ➕ Temario
+                                Temario
                             </button>
                             <button onclick="abrirModalItem({{ $section->id_section }}, 'tarea')"
                                     style="background:#fd7e14; color:white; border:none;
                                            padding:5px 12px; border-radius:4px; cursor:pointer; font-size:0.85rem;">
-                                ➕ Tarea
+                                Tarea
                             </button>
                             <form method="POST" action="{{ route('sections.destroy', $section->id_section) }}"
                                   style="margin:0;">
@@ -108,7 +107,7 @@
             justify-content:center; align-items:center;">
     <div style="background:white; border-radius:10px; padding:30px;
                 width:100%; max-width:420px;">
-        <h2 style="margin-top:0;">➕ Nuevo apartado</h2>
+        <h2 style="margin-top:0;">Nuevo apartado</h2>
         <form method="POST" action="{{ route('sections.store', $course->id_course) }}">
             @csrf
             <input type="text" name="title" placeholder="Nombre del apartado"
@@ -136,7 +135,7 @@
             justify-content:center; align-items:center;">
     <div style="background:white; border-radius:10px; padding:30px;
                 width:100%; max-width:480px; max-height:90vh; overflow-y:auto;">
-        <h2 style="margin-top:0;" id="modal-item-titulo">➕ Añadir contenido</h2>
+        <h2 style="margin-top:0;" id="modal-item-titulo">Añadir contenido</h2>
         <form method="POST" id="form-item" action="" enctype="multipart/form-data"
               style="display:flex; flex-direction:column; gap:14px;">
             @csrf
@@ -202,11 +201,11 @@ function abrirModalItem(sectionId, tipo) {
     form.action = '/sections/' + sectionId + '/items';
     inputType.value = tipo;
     if (tipo === 'tarea') {
-        titulo.textContent = '✏️ Nueva tarea';
+        titulo.textContent = 'Nueva tarea';
         camposTarea.style.display = 'block';
         camposTemario.style.display = 'none';
     } else {
-        titulo.textContent = '📄 Nuevo temario';
+        titulo.textContent = 'Nuevo temario';
         camposTarea.style.display = 'none';
         camposTemario.style.display = 'block';
     }
