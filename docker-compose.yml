@@ -1,0 +1,42 @@
+services:
+  app:
+    build: .
+    container_name: didacta_app
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USERNAME: didacta
+      DB_PASSWORD: didacta
+    command: apache2-foreground
+
+  mysql:
+    image: mysql:8
+    container_name: didacta_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: proyecto_alival
+      MYSQL_USER: didacta
+      MYSQL_PASSWORD: didacta
+    command: --log-bin-trust-function-creators=1
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: didacta_phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+
+volumes:
+  mysql_data:

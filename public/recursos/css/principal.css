@@ -1,0 +1,1578 @@
+body {
+  padding: 0px;
+  padding-bottom: 80px;
+  background: white;
+  background-size: cover;
+  position: relative;
+
+  /* FIX ANTI FLASH */
+    opacity: 1;
+    transform: none;;
+}
+
+body.loaded {
+    animation: pageIn 0.25s ease;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   TITULO
+========================= */
+.titulo {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #111;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.titulo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 45%;
+  height: 4px;
+  background-color: #111;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+/* =========================
+   ANIMACIÓN
+========================= */
+@media (prefers-reduced-motion: no-preference) {
+  .animacion.animar {
+    animation: fadeUp 0.6s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* =========================
+   LINEA
+========================= */
+.linea {
+  border: none;
+  height: 3px;
+  background: linear-gradient(to right, #111, rgba(17,17,17,0.6), rgba(17,17,17,0.2));
+  border-radius: 2px;
+  margin: 2rem 0;
+}
+
+/* =========================
+   MENU
+========================= */
+.menu {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.menu-item a {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #111;
+  text-decoration: none;
+  position: relative;
+}
+
+.menu-item a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #111;
+  opacity: 0.8;
+  transition: width 0.25s ease;
+}
+
+.menu-item a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   SUBTITULO
+========================= */
+.subtitulo {
+  font-size: clamp(1.2rem, 3vw, 0.5rem);
+  color: #111;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* =========================
+   FOOTER BOTÓN
+========================= */
+.footer-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+}
+
+.footer-btn:hover {
+  background: linear-gradient(135deg, #5f7edc, #1f2f5a);
+  transform: translateY(-3px);
+}
+
+.footer-btn:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+/* =========================
+   🎓 CURSOS (MOODLE STYLE)
+========================= */
+.courses-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.course-card {
+  display: block;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  color: #111;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: all 0.25s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.course-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.course-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .courses-container {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+}
+
+/* =========================
+   👤 USUARIO (ARRIBA DERECHA)
+========================= */
+.user-welcome {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  font-weight: 600;
+  color: #111;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-size: 0.95rem;
+  z-index: 999;
+}
+
+/* =========================
+   HEADER CURSO (MOODLE STYLE)
+========================= */
+
+.course-header {
+  max-width: 900px;
+  margin: 30px auto 20px auto;
+  padding: 0 20px;
+}
+
+.course-header h1 {
+  margin: 10px 0 0 0;
+  font-size: 1.8rem;
+  color: #111;
+}
+
+/* BOTÓN VOLVER BONITO */
+/* =========================
+   BOTÓN VOLVER (BLANCO LIMPIO)
+========================= */
+
+.back-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  padding: 8px 14px;
+  border-radius: 10px;
+
+  background: #ffffff; /* 🔥 blanco puro */
+  border: 1px solid rgba(0,0,0,0.12);
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+  transition: all 0.2s ease;
+  margin-top: 8px; /* 👈 separa del "Bienvenido usuario" */
+
+}
+
+.back-btn:hover {
+  background: #f9f9f9; /* leve hover suave */
+  transform: translateY(-2px);
+}
+
+.back-btn:active {
+  transform: translateY(0);
+}
+.user-actions {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+}
+
+.header {
+  position: relative;
+}
+
+/* =========================
+   IMÁGENES CURSOS
+========================= */
+
+/* =========================
+   IMÁGENES CURSOS (FIX)
+========================= */
+
+/* =========================
+   TARJETAS MODERNAS
+========================= */
+
+.course-card {
+  display: block;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+
+  text-decoration: none;
+  color: #111;
+
+  border: 1px solid rgba(0,0,0,0.08);
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+
+  transition: all 0.25s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+/* IMAGEN PEQUEÑA */
+.course-img {
+  width: 100%;
+  height: 110px;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+/* TEXTO */
+.course-info {
+  padding: 16px;
+}
+
+.course-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+}
+
+.course-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+/* =========================
+   MENU + BOTÓN EN LA MISMA LÍNEA
+========================= */
+
+.menu-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 20px;
+}
+
+.menu {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* evita que el botón baje */
+.theme-btn {
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   🌙 MODO OSCURO LIMPIO
+========================= */
+
+.dark-mode {
+  background: #121212;
+  color: #f1f1f1;
+}
+
+/* textos */
+.dark-mode p,
+.dark-mode span,
+.dark-mode li {
+  color: #dcdcdc;
+}
+
+/* títulos */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: #ffffff;
+}
+
+/* enlaces */
+.dark-mode a {
+  color: #ffffff;
+}
+
+/* tarjetas */
+.dark-mode .course-card {
+  background: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.dark-mode .course-card p {
+  color: #c9c9c9;
+}
+
+/* menú */
+.dark-mode .menu-item a {
+  color: #ffffff;
+}
+
+/* usuario */
+.dark-mode .user-welcome {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
+/* línea */
+.dark-mode .linea {
+  background: linear-gradient(to right, #fff, rgba(255,255,255,0.4), transparent);
+}
+
+/* subtítulo (FIJO IMPORTANTE) */
+.dark-mode .subtitulo {
+  color: #ffffff !important;
+  opacity: 0.9;
+}
+
+/* botón tema */
+.theme-btn {
+  flex-shrink: 0;
+}
+
+/* =========================
+   🌙 TRANSICIONES SUAVES
+========================= */
+
+body {
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.course-card {
+  transition: all 0.3s ease;
+}
+
+.menu-item a {
+  transition: color 0.3s ease;
+}
+
+.user-welcome {
+  transition: all 0.3s ease;
+}
+
+.linea {
+  transition: background 0.4s ease;
+}
+
+.theme-btn {
+  transition: all 0.3s ease;
+}
+
+.dark-mode .titulo::after {
+  background-color: #fff !important;
+}
+
+.admin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    background: white;
+    color: black !important;
+
+    text-decoration: none;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    border: 1px solid #ddd;
+
+    transition: all 0.2s ease;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.admin-btn:hover {
+    transform: translateY(-2px);
+    background: #f5f5f5;
+}
+
+.dark-mode .back-btn {
+  background: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.dark-mode .back-btn:hover {
+  background: #2a2a2a;
+}
+
+/* =========================
+   🌙 DARK MODE GLOBAL
+========================= */
+
+/* fondos generales */
+.dark-mode {
+  background: #121212;
+  color: #f1f1f1;
+}
+
+/* cajas */
+.dark-mode div,
+.dark-mode section,
+.dark-mode article,
+.dark-mode aside,
+.dark-mode main {
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* textos */
+.dark-mode p,
+.dark-mode span,
+.dark-mode li,
+.dark-mode label {
+  color: #dcdcdc;
+}
+
+/* títulos */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: #ffffff;
+}
+
+/* enlaces */
+.dark-mode a {
+  color: #ffffff;
+}
+
+/* formularios */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background: #1e1e1e;
+  color: white;
+  border: 1px solid #444;
+}
+
+/* placeholders */
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+  color: #999;
+}
+
+/* botones generales */
+.dark-mode button {
+  background: #1e1e1e;
+  color: white;
+  border: 1px solid #444;
+}
+
+/* hover botones */
+.dark-mode button:hover {
+  background: #2a2a2a;
+}
+
+.dark-mode .tarjeta {
+  background: #1a2240;
+  border: 1px solid #2d3a6a;
+  color: #ffffff;
+}
+
+.dark-mode .tarjeta h3 {
+  color: #c5d0f0;
+}
+
+.dark-mode .tarjeta p {
+  color: #8fa3e0;
+}
+
+.dark-mode .tarjeta a {
+  color: #7b9de0;
+}
+
+.dark-mode .tema {
+    border-color: #444;
+}
+
+.dark-mode .tema-titulo {
+    background: #1e2a3a;
+    color: #eee;
+}
+
+.dark-mode .tema-titulo:hover {
+    background: #263548;
+}
+
+.dark-mode .tema-contenido {
+    background: #151f2e;
+}
+
+.dark-mode .tema-contenido a {
+    color: #ccc;
+}
+
+.dark-mode .tema-contenido a:hover {
+    background: #1e2a3a;
+    color: #7eb3ff;
+}
+
+/* =========================
+   FIX DEFINITIVO BOTONES / LINKS
+========================= */
+
+/* elimina highlight azul en click móvil + chrome */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* elimina estados de interacción del navegador */
+a, button {
+  outline: none !important;
+}
+
+/* elimina efecto azul de click en Chrome */
+a:focus,
+a:active,
+a:focus-visible,
+button:focus,
+button:active,
+button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* evita selección rara al clicar */
+a {
+  user-select: none;
+}
+
+/* =========================
+   FIX FINAL BOTONES LIMPIO (REAL)
+========================= */
+
+a, button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
+}
+
+/* elimina transición del navegador en click */
+a:active,
+button:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background: inherit;
+}
+
+/* elimina foco visual SOLO cuando es click real */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.back-btn {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
+  user-select: none;
+}
+
+/* QUITA EL FOCO REAL DEL NAVEGADOR */
+.back-btn:focus,
+.back-btn:active,
+.back-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* IMPORTANTE: elimina transición de foco */
+.back-btn {
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* =========================
+   📌 CONTENEDOR DEL FORO
+========================= */
+.forum-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* =========================
+   📌 TARJETAS DEL FORO
+========================= */
+.forum-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+
+  transition: all 0.25s ease;
+}
+
+.forum-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   📌 BOTÓN CREAR TEMA
+========================= */
+.forum-button {
+  display: block;
+  background: #3b82f6;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.forum-button:hover {
+  background: #1e40af;
+}
+
+/* =========================
+   📌 ANIMACIÓN DEL FORO
+========================= */
+.forum-anim {
+  animation: fadeUp 0.6s ease-out both;
+}
+
+#tablon {
+  display: grid;
+  grid-template-columns: 1fr; /* 👈 una sola columna */
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 20px;
+}
+
+.tarjeta {
+  background: #f0f4ff; /* azul muy suave */
+  border: 1px solid #c5d0f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.tarjeta:hover {
+  border-color: #8fa3e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.tarjeta h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+  color: #1a2a6c; /* azul oscuro */
+}
+
+.tarjeta p {
+  font-size: 13px;
+  color: #3a4a7a; /* azul medio */
+  margin: 0;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.tarjeta a {
+  font-size: 13px;
+  color: #4b6cb7;
+  text-decoration: none;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.tarjeta a:hover {
+  color: #182848;
+}
+
+.curso-wrapper {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.curso-temas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tema {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tema-titulo {
+    width: 100%;
+    padding: 15px 20px;
+    background: #f0f4ff;
+    border: none;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.tema-titulo:hover {
+    background: #dce8ff;
+}
+
+.flecha {
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+}
+
+.tema-contenido {
+    display: none;
+    flex-direction: column;
+    padding: 10px 20px;
+    gap: 8px;
+    background: #fff;
+}
+
+.tema-contenido.abierto {
+    display: flex;
+}
+
+.tema-contenido a {
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+}
+
+.tema-contenido a:hover {
+    background: #f0f4ff;
+    color: #1a56db;
+}
+
+/* =========================
+   FORO ESTILO TIPO NOTICIAS (DARK MODE)
+========================= */
+
+.dark-mode .forum-card {
+    background: #1a2240;   /* mismo estilo que tarjetas */
+    border: 1px solid #2d3a6a;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.dark-mode .forum-card h3 {
+    color: #c5d0f0;
+}
+
+.dark-mode .forum-card p {
+    color: #8fa3e0;
+}
+
+.dark-mode .forum-card a {
+    color: #7b9de0;
+}
+
+.dark-mode .forum-card a:hover {
+    color: #ffffff;
+}
+
+/* =========================
+   FIX TEXTAREA FORO (NO RESIZE)
+========================= */
+
+.forum-card textarea {
+    resize: none;
+
+    width: 100%;
+    max-width: 900px;   /* 👈 limita el ancho real */
+    height: 110px;
+
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    display: block;
+    box-sizing: border-box; /* 🔥 CLAVE */
+}
+
+/* modo oscuro */
+.dark-mode .forum-card textarea {
+    background: #1e1e1e;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+.dark-mode .admin-btn {
+    background: #1e1e1e;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .admin-btn:hover {
+    background: #2a2a2a;
+}
+
+/* =========================
+   📅 EVENTS PAGE
+========================= */
+
+.events-page {
+     background: inherit;
+    min-height: 100vh;
+    padding: 12px 20px;
+}
+
+/* =========================
+   📝 TITULOS
+========================= */
+
+.events-page h1,
+.events-page h2,
+.events-page h3,
+.events-page h4,
+.events-page h5 {
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* =========================
+   🧩 SIDEBAR
+========================= */
+
+.events-page .sidebar .card {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #e5e7eb;
+    transition: 0.2s ease;
+    color: #111827;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.events-page .sidebar .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+/* =========================
+   📅 CALENDARIO
+========================= */
+
+.events-page .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+/* días semana */
+.events-page .calendar-grid:first-child {
+    margin-bottom: 10px;
+}
+
+.events-page .calendar-grid:first-child .day {
+    background: transparent;
+    border: none;
+    min-height: auto;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #6b7280 !important;
+    box-shadow: none;
+    cursor: default;
+    justify-content: center;
+    align-items: center;
+}
+
+/* días calendario */
+.events-page .day {
+    background: white;
+    border-radius: 10px;
+    min-height: 52px;
+    padding: 6px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-weight: 600;
+    font-size: 14px;
+    color: #111827 !important;
+    text-decoration: none !important;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    position: relative;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.events-page .day:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+    background: #eef4ff;
+}
+
+/* días con evento */
+.events-page .day.has-event {
+    border: 2px solid #4b6cb7;
+}
+
+.events-page .day.has-event::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #4b6cb7;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+}
+
+/* =========================
+   📌 CARDS / PANELES
+========================= */
+
+.events-page .card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* =========================
+   📱 RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .events-page .calendar-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .events-page .day {
+        min-height: 55px;
+    }
+
+}
+
+/* separación panel inferior calendario */
+
+.events-page #eventDetails {
+    margin-top: 18px !important;
+}
+
+.events-page #eventDetails {
+    margin-top: 18px !important;
+}
+
+/* =========================
+   ➕ BOTÓN CREAR EVENTO
+========================= */
+
+.events-page .create-btn {
+
+    position: absolute;
+
+    top: 5px;
+    right: 5px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #4b6cb7;
+
+    color: white !important;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    opacity: 0;
+
+    transition: 0.18s ease;
+}
+
+/* aparece al pasar ratón */
+.events-page .day:hover .create-btn {
+    opacity: 1;
+}
+
+/* cabecera días semana */
+.events-page .day-header {
+
+    background: transparent !important;
+
+    border: none !important;
+
+    min-height: auto !important;
+
+    padding: 0 !important;
+
+    box-shadow: none !important;
+
+    cursor: default !important;
+
+    justify-content: center !important;
+
+    align-items: center !important;
+
+    color: #6b7280 !important;
+}
+
+/* =========================
+   ✏️ EVENT EDIT PAGE (FIX REAL VISUAL)
+========================= */
+
+.event-edit-page {
+    min-height: 100vh;
+    background: transparent !important;
+    padding: 40px 20px;
+    color: inherit !important;
+}
+
+/* wrapper igual que create */
+.event-edit-page .event-create-wrapper {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.event-edit-page .event-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+/* bloque texto ocupa todo el espacio */
+.event-edit-page .event-top > div {
+    flex: 1;
+}
+
+/* TITULO */
+.event-edit-page .event-top h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: white !important;
+}
+
+/* SUBTITULO */
+.event-edit-page .event-top p {
+    opacity: 0.75;
+    color: white !important;
+}
+
+/* BOTON VOLVER (🔥 FIJO A LA DERECHA) */
+.event-edit-page .back-events-btn {
+    margin-left: auto; /* CLAVE REAL */
+    background: rgba(255,255,255,0.08);
+    color: white !important;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.event-edit-page .back-events-btn:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* =========================
+   CARD
+========================= */
+
+.event-edit-page .event-form-card {
+    background: white;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+
+/* GRID */
+.event-edit-page .event-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* LABELS */
+.event-edit-page .form-group-custom label {
+    display: block;
+    color: white !important;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* INPUTS */
+.event-edit-page .custom-input {
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+/* TEXTAREA */
+.event-edit-page .custom-textarea {
+    min-height: 180px;
+    resize: none;
+}
+
+/* COLOR */
+.event-edit-page .color-picker {
+    height: 55px;
+    border-radius: 14px;
+    border: none;
+    background: transparent;
+}
+
+/* FECHA */
+.event-edit-page .selected-date-box {
+    margin-top: 20px;
+    background: rgba(75,108,183,0.15);
+    border: 1px solid rgba(75,108,183,0.35);
+    padding: 18px;
+    border-radius: 16px;
+    color: white;
+}
+
+/* BOTONES */
+.event-edit-page .event-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.event-edit-page .cancel-btn {
+    background: rgba(255,255,255,0.08);
+    color: white;
+    padding: 14px 22px;
+    border-radius: 14px;
+    text-decoration: none;
+}
+
+.event-edit-page .save-btn {
+    background: linear-gradient(135deg, #4b6cb7, #182848);
+    border: none;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 14px;
+    font-weight: bold;
+}
+
+.event-edit-page .save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+
+    .event-edit-page .event-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-edit-page .event-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .event-edit-page .back-events-btn {
+        margin-left: 0;
+    }
+}
+
+/* ============================
+   TABLA USUARIOS — ESTILO BASE
+============================ */
+
+.users-wrapper {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.users-table thead tr {
+    background: #f0f4ff;
+    color: #1a2a6c;
+}
+
+.users-table th {
+    padding: 12px;
+    text-align: left;
+}
+
+.user-row {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.user-row td {
+    padding: 14px;
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+}
+
+/* ============================
+   ALERTA DE ÉXITO
+============================ */
+
+.alert-success {
+    background:#d4edda;
+    color:#155724;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+/* ============================
+   TABLA USUARIOS — ESTILO BASE
+============================ */
+
+.users-wrapper {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.users-table thead tr {
+    background: #f0f4ff;
+    color: #1a2a6c;
+}
+
+.users-table th {
+    padding: 12px;
+    text-align: left;
+}
+
+.user-row {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.user-row td {
+    padding: 14px;
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+}
+
+/* ============================
+   ALERTA DE ÉXITO
+============================ */
+
+.alert-success {
+    background:#d4edda;
+    color:#155724;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+/* ============================
+   🌙 MODO OSCURO — TABLA USUARIOS
+============================ */
+
+.dark-mode .users-table thead tr {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .user-row {
+    background: #181818 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(255,255,255,0.08) !important;
+}
+
+.dark-mode .user-row td {
+    color: #ffffff !important;
+}
+
+.dark-mode .alert-success {
+    background: #1f3d1f !important;
+    color: #b6ffb6 !important;
+}
+
+/* Botón borrar */
+.admin-btn.delete {
+    background: #dc3545;
+    color: white !important;
+}
+
+.dark-mode .admin-btn.delete {
+    background: #b02a37 !important;
+}
+
+/* =========================
+   📅 EVENTS DARK MODE FIX COMPLETO
+========================= */
+
+/* fondo general de la página eventos */
+.dark-mode .events-page {
+    background: #121212 !important;
+    color: #f1f1f1 !important;
+}
+
+/* tarjetas (sidebar + panel inferior + detalles si llevan class card) */
+.dark-mode .events-page .card {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* calendario días */
+.dark-mode .events-page .day {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* hover calendario */
+.dark-mode .events-page .day:hover {
+    background: #2a2a2a !important;
+}
+
+/* SIDEBAR cards */
+.dark-mode .events-page .sidebar .card {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* EVENTOS GENERADOS POR JS */
+.event-item {
+    background: #f8fafc;
+    color: #111;
+}
+
+.dark-mode .event-item {
+    background: #1e1e1e !important;
+    color: #fff !important;
+}
+
+/* EVENT CARD (ya la tienes pero la dejamos perfecta) */
+.event-card {
+    background: white;
+    color: #111;
+}
+
+.dark-mode .event-card {
+    background: #1e1e1e !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* PANEL DERECHO (IMPORTANTE: id eventInfo) */
+.dark-mode #eventInfo {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* TEXTO INTERNO DEL PANEL */
+.dark-mode #eventInfo p,
+.dark-mode #eventInfo h5 {
+    color: #ffffff !important;
+}
+
+/* PANEL INFERIOR */
+.dark-mode #eventText {
+    color: #ffffff !important;
+}
+
+/* =========================
+   🔥 FIX EVENTOS DARK MODE (FORZADO)
+========================= */
+
+body.dark-mode .events-page {
+    background: #121212 !important;
+}
+
+/* Bootstrap override fuerte */
+body.dark-mode .events-page .card,
+body.dark-mode .events-page .sidebar .card,
+body.dark-mode .events-page .col-md-3 .card,
+body.dark-mode .events-page .col-md-6 .card,
+body.dark-mode .events-page .col-md-3,
+body.dark-mode .events-page .col-md-6,
+body.dark-mode .events-page .col-md-3 * ,
+body.dark-mode .events-page .col-md-6 * {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* calendario */
+body.dark-mode .events-page .day {
+    background: #1e1e1e !important;
+    color: #fff !important;
+}
+
+/* FIX texto Bootstrap raro */
+body.dark-mode .events-page small,
+body.dark-mode .events-page b {
+    color: #e5e5e5 !important;
+}
+
+.dark-mode .event-edit-page .custom-input {
+    background: #2a2a2a;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: white;
+}

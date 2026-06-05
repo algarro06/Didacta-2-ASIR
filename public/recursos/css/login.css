@@ -1,0 +1,132 @@
+/* 🔥 FONDO AJUSTADO Y ENTERO */
+body {
+  margin: 0;
+  padding: 40px;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.4),
+      rgba(0,0,0,0.4)
+    ),
+    url("../imagenes/Fotos_Index/fondo1.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000;
+}
+
+/* 🔤 TIPOGRAFÍA Y RESET */
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 📦 CONTENEDOR DEL LOGIN */
+.page {
+  width: 100%;
+  max-width: 420px;
+  min-height: 420px;
+  padding: 20px;
+  margin: auto;
+  margin-top: calc(40vh - 210px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* 🧩 CAJA DEL LOGIN */
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 10px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* ✏ CAMPOS */
+.login-box input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.login-box input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+/* 🔘 BOTÓN */
+.login-box button {
+  width: 50%;
+  padding: 14px;
+
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 25px rgba(79, 70, 229, 0.6);
+}
+
+/* 🔔 ALERTAS BONITAS */
+.alert-box {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ❌ ERROR (rojo elegante) */
+.alert-error {
+  background: linear-gradient(135deg, #e53935, #ef5350);
+  color: white;
+  box-shadow: 0 10px 20px rgba(229, 57, 53, 0.4);
+}
+
+/* ✔ ÉXITO (verde suave) */
+.alert-success {
+  background: linear-gradient(135deg, #43a047, #66bb6a);
+  color: white;
+  box-shadow: 0 10px 20px rgba(67, 160, 71, 0.4);
+}
+
+/* 🎞 ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
