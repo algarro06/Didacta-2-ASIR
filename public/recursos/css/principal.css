@@ -1578,8 +1578,7 @@ body.dark-mode .events-page b {
 }
 
 /* ============================
-   MODO OSCURO GLOBAL
-   (asegúrate de que el botón 🌙 añade .dark-mode al <body>)
+   🌙 MODO OSCURO — CREAR NUEVO CURSO
    ============================ */
 
 .dark-mode {
@@ -1587,70 +1586,50 @@ body.dark-mode .events-page b {
     color: #e5e5e5 !important;
 }
 
-/* Header de la página de alumnos */
-.dark-mode .page-alumnos-header {
+/* Header */
+.dark-mode .page-crear-header {
     background: #1e1e1e !important;
-    color: #ffffff !important;
+    color: #fff !important;
 }
 
-/* Wrapper principal */
-.dark-mode .page-alumnos-wrapper {
-    background: #181818 !important;
-    border-radius: 10px;
+/* Wrapper */
+.dark-mode .page-crear-wrapper {
+    background: #1a1a1a !important;
     border: 1px solid #333 !important;
+    border-radius: 10px;
 }
 
-/* Textos dentro del wrapper (h2, p, etc.) */
-.dark-mode .page-alumnos-wrapper h2,
-.dark-mode .page-alumnos-wrapper p {
-    color: #e0e0e0 !important;
+/* Labels */
+.dark-mode .label-crear-curso {
+    color: #e5e5e5 !important;
 }
 
-/* Alert de éxito */
-.dark-mode .alert-success-curso {
-    background: #1f3b24 !important;
-    color: #b9ffcb !important;
-    border: 1px solid #2f6b3a !important;
-}
-
-/* Tabla de alumnos */
-.dark-mode .tabla-alumnos thead tr {
-    background: #262626 !important;
-}
-
-.dark-mode .tabla-alumnos th {
-    color: #f0f0f0 !important;
-    border-color: #444 !important;
-    background: transparent !important;
-}
-
-.dark-mode .tabla-alumnos td {
-    background: #1f1f1f !important;
-    color: #e0e0e0 !important;
-    border-color: #444 !important;
-}
-
-/* Botón eliminar alumno */
-.dark-mode .btn-eliminar-alumno {
-    background: #b02a37 !important;
-    color: #fff !important;
-}
-
-/* Select de alumnos disponibles */
-.dark-mode .select-alumno {
+/* Inputs */
+.dark-mode .input-crear-curso {
     background: #222 !important;
-    color: #f0f0f0 !important;
-    border-color: #444 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
 }
 
-/* Botón añadir alumno */
-.dark-mode .btn-anadir-alumno {
-    background: #218838 !important;
+.dark-mode .input-crear-curso::placeholder {
+    color: #aaa !important;
+}
+
+/* Botón crear */
+.dark-mode .btn-crear-curso {
+    background: #2d4a7a !important;
     color: #fff !important;
 }
 
-/* Botón volver al curso */
-.dark-mode .btn-volver-curso {
+/* Botón cancelar */
+.dark-mode .btn-cancelar-curso {
     background: #555 !important;
     color: #fff !important;
+}
+
+/* Alertas */
+.dark-mode .alert-crear-curso {
+    background: #5c1f1f !important;
+    color: #ffb3b3 !important;
+    border: 1px solid #7a2a2a !important;
 }
