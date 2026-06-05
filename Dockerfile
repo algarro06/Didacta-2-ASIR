@@ -43,4 +43,4 @@ RUN sed -i 's#/var/www/html#/var/www/html/public#g' \
 
 EXPOSE 80
 
-CMD php artisan key:generate --force && php artisan config:cache && php artisan migrate:fresh --seed --force && apache2-foreground
+CMD ["sh", "deploy.sh"]
