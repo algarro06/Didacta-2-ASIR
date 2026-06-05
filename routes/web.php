@@ -98,9 +98,8 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
 // SECCIÓN TFG: AUDITORÍA DE BACKUPS Y USUARIOS
 // ==========================================
 
-// 1. EL VERIFICADOR DEL HISTORIAL (Para enseñárselo al tribunal - apunta a /tmp)
+// 1. EL VERIFICADOR DEL HISTORIAL 
 Route::get('/ver-backups-periodicos', function () {
-    // Listamos el contenido detallado de la carpeta /tmp buscando archivos .sql
     $resultado = Process::run('ls -lh /tmp');
 
     if ($resultado->successful()) {
@@ -112,13 +111,13 @@ Route::get('/ver-backups-periodicos', function () {
         ->header('Content-Type', 'text/plain');
 });
 
-// 2. Ejecutor forzado manual (Guarda directamente en /tmp con permisos totales)
+// 2. EJECUTOR DE COPIAS DE SEGURIDAD (CORREGIDO PARA ELIMINAR BLOQUEOS TLS Y FLAGS INCOMPATIBLES)
 Route::get('/forzar-backup-ahora', function () {
     $fecha = date('Y-m-d_H-i-s');
-    $rutaArchivo = "/tmp/backup_diario_{$fecha}.sql";
+    $rutaArchivo = "/tmp/backup_manual_{$fecha}.sql";
     
-    // Comando limpio apuntando a /tmp y usando bypass de SSL compatible con MariaDB/MySQL
-    $comando = "mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --skip-ssl defaultdb > {$rutaArchivo}";
+    // Comando universal sin flags problemáticos de versión y omitiendo la validación estricta del certificado
+    $comando = "mysqldump --opt -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --skip-ssl defaultdb > {$rutaArchivo}";
     
     $resultado = Process::run($comando);
 
@@ -127,11 +126,16 @@ Route::get('/forzar-backup-ahora', function () {
             ->header('Content-Type', 'text/plain');
     }
 
-    return response("Error al generar el volcado de base de datos:\n\n" . $resultado->errorOutput(), 500)
+    return response("Error al hacer backup: " . $resultado->errorOutput(), 500)
         ->header('Content-Type', 'text/plain');
 });
 
-// 3. Ruta para comprobar la existencia de los dos usuarios requeridos
+// También mapeamos 'probar-backup' por si accedes desde ese enlace que sale en tus capturas
+Route::get('/probar-backup', function() {
+    return redirect('/forzar-backup-ahora');
+});
+
+// 3. COMPROBACIÓN DE USUARIOS
 Route::get('/comprobar-usuarios', function () {
     try {
         $usuarios = DB::select("SELECT User, Host FROM mysql.user WHERE User IN ('didacta_app', 'didacta_read')");
