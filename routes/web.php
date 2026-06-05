@@ -79,3 +79,22 @@ Route::get('/community/{id}/topic/create', [ForumController::class, 'createTopic
 Route::post('/community/{id}/topic/store', [ForumController::class, 'storeTopic'])->name('community.topic.store');
 Route::post('/community/{id}/post/store', [ForumController::class, 'storePost'])->name('community.post.store');
 });
+
+use Illuminate\Support\Facades\Process;
+
+Route::get('/probar-backup', function () {
+    // Tus datos reales de Aiven mapeados en el comando
+    $comando = 'mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --ssl-mode=REQUIRED --column-statistics=0 defaultdb';
+    
+    // Ejecutamos el comando dentro de Render
+    $resultado = Process::run($comando);
+
+    if ($resultado->successful()) {
+        // Si funciona, nos va a pintar el código SQL directamente en la pantalla
+        return response($resultado->output(), 200)
+            ->header('Content-Type', 'text/plain');
+    }
+
+    // Si falla, nos mostrará el error exacto por pantalla
+    return response("Error al hacer backup: " . $resultado->errorOutput(), 500);
+});
