@@ -16,6 +16,21 @@ RUN echo "opcache.enable=1" > /usr/local/etc/php/conf.d/opcache.ini && \
     echo "opcache.max_accelerated_files=20000" >> /usr/local/etc/php/conf.d/opcache.ini && \
     echo "opcache.validate_timestamps=0" >> /usr/local/etc/php/conf.d/opcache.ini
 
+# Configuración OPcache (Ya lo tenías)
+RUN echo "opcache.enable=1" > /usr/local/etc/php/conf.d/opcache.ini && \
+    echo "opcache.memory_consumption=256" >> /usr/local/etc/php/conf.d/opcache.ini && \
+    echo "opcache.max_accelerated_files=20000" >> /usr/local/etc/php/conf.d/opcache.ini && \
+    echo "opcache.validate_timestamps=0" >> /usr/local/etc/php/conf.d/opcache.ini
+
+# NUEVO: Configuración de límites de subida en PHP (100MB)
+RUN echo "upload_max_filesize=100M" > /usr/local/etc/php/conf.d/uploads.ini && \
+    echo "post_max_size=100M" >> /usr/local/etc/php/conf.d/uploads.ini && \
+    echo "memory_limit=512M" >> /usr/local/etc/php/conf.d/uploads.ini
+
+# NUEVO: Copiar límites de Apache al servidor
+COPY apache-limits.conf /etc/apache2/conf-available/apache-limits.conf
+RUN a2enconf apache-limits
+
 # Copiar proyecto
 COPY . /var/www/html
 
