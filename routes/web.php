@@ -95,40 +95,57 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
 });
 
 // ==========================================
-// CONTROL DEL SERVIDOR (BACKUPS Y USUARIOS)
+// SECCIÓN TFG: AUDITORÍA DE BACKUPS Y USUARIOS
 // ==========================================
 
-// Ruta definitiva para ejecutar el Backup ignorando el bloqueo de certificado SSL
-Route::get('/probar-backup', function () {
-    // Intento 1: Desactivando explícitamente la verificación del certificado autofirmado
-    $comando = 'mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --ssl --ssl-verify-server-cert=OFF defaultdb';
+// 1. EL VERIFICADOR DE LA CARPETA /BACKUPS (Para enseñárselo al tribunal)
+Route::get('/ver-backups-periodicos', function () {
+    // Le pedimos al contenedor que liste de forma detallada la carpeta /backups
+    $resultado = Process::run('ls -lh /backups');
+
+    if ($resultado->successful()) {
+        $salida = $resultado->output();
+        
+        if (empty(trim($salida))) {
+            return response("La carpeta '/backups' está creada, pero aún está vacía. Esperando al ciclo diario.", 200)
+                ->header('Content-Type', 'text/plain');
+        }
+        
+        return response("Historial de Backups Automáticos Diarios detectados en el servidor:\n\n" . $salida, 200)
+            ->header('Content-Type', 'text/plain');
+    }
+
+    // Si la carpeta no existe todavía en el contenedor, intentamos ver la carpeta /tmp por si acaso
+    $resultadoTmp = Process::run('ls -lh /tmp');
+    return response("La carpeta /backups no está accesible. Contenido alternativo /tmp:\n\n" . $resultadoTmp->output(), 500)
+        ->header('Content-Type', 'text/plain');
+});
+
+// 2. Ejecutor forzado manual (Por si quieres generar uno en caliente en la defensa)
+Route::get('/forzar-backup-ahora', function () {
+    // Aseguramos que la carpeta exista antes de tirar el dump
+    Process::run('mkdir -p /backups');
+    
+    $fecha = date('Y-m-d_H-i-s');
+    $rutaArchivo = "/backups/backup_manual_{$fecha}.sql";
+    
+    // Comando con bypass de SSL compatible
+    $comando = "mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --skip-ssl defaultdb > {$rutaArchivo}";
     
     $resultado = Process::run($comando);
 
     if ($resultado->successful()) {
-        return response($resultado->output(), 200)
+        return response("¡Éxito! Copia de seguridad forzada y guardada en: {$rutaArchivo}\nVe a /ver-backups-periodicos para verificar el almacenamiento.", 200)
             ->header('Content-Type', 'text/plain');
     }
 
-    // Intento 2 (Alternativo): Si el cliente de Linux se queja, saltamos el SSL para forzar la lectura del dump
-    $comandoAlternativo = 'mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --skip-ssl defaultdb';
-    $resultadoAlt = Process::run($comandoAlternativo);
-
-    if ($resultadoAlt->successful()) {
-        return response($resultadoAlt->output(), 200)
-            ->header('Content-Type', 'text/plain');
-    }
-
-    // Si ambos fallan, devolvemos el error combinado
-    return response("Error en ambos intentos de Backup.\n\nError 1: " . $resultado->errorOutput() . "\nError 2: " . $resultadoAlt->errorOutput(), 500)
-        ->header('Content-Type', 'text/plain');
+    return response("Error al generar: " . $resultado->errorOutput(), 500);
 });
 
-// Ruta para comprobar la existencia de los dos usuarios requeridos
+// 3. Ruta para comprobar la existencia de los dos usuarios requeridos
 Route::get('/comprobar-usuarios', function () {
     try {
         $usuarios = DB::select("SELECT User, Host FROM mysql.user WHERE User IN ('didacta_app', 'didacta_read')");
-        
         return response()->json([
             'status' => 'success',
             'mensaje' => 'Usuarios encontrados en el servidor MySQL de Aiven:',
@@ -137,7 +154,7 @@ Route::get('/comprobar-usuarios', function () {
     } catch (\Exception $e) {
         return response()->json([
             'status' => 'error',
-            'mensaje' => 'No se pudieron listar los usuarios desde la tabla interna: ' . $e->getMessage()
+            'mensaje' => 'Error: ' . $e->getMessage()
         ], 500);
     }
 });
