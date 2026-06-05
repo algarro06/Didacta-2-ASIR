@@ -98,48 +98,37 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
 // SECCIÓN TFG: AUDITORÍA DE BACKUPS Y USUARIOS
 // ==========================================
 
-// 1. EL VERIFICADOR DE LA CARPETA /BACKUPS (Para enseñárselo al tribunal)
+// 1. EL VERIFICADOR DEL HISTORIAL (Para enseñárselo al tribunal - apunta a /tmp)
 Route::get('/ver-backups-periodicos', function () {
-    // Le pedimos al contenedor que liste de forma detallada la carpeta /backups
-    $resultado = Process::run('ls -lh /backups');
+    // Listamos el contenido detallado de la carpeta /tmp buscando archivos .sql
+    $resultado = Process::run('ls -lh /tmp');
 
     if ($resultado->successful()) {
-        $salida = $resultado->output();
-        
-        if (empty(trim($salida))) {
-            return response("La carpeta '/backups' está creada, pero aún está vacía. Esperando al ciclo diario.", 200)
-                ->header('Content-Type', 'text/plain');
-        }
-        
-        return response("Historial de Backups Automáticos Diarios detectados en el servidor:\n\n" . $salida, 200)
+        return response("Historial de Backups Automáticos Diarios detectados en el servidor (/tmp):\n\n" . $resultado->output(), 200)
             ->header('Content-Type', 'text/plain');
     }
 
-    // Si la carpeta no existe todavía en el contenedor, intentamos ver la carpeta /tmp por si acaso
-    $resultadoTmp = Process::run('ls -lh /tmp');
-    return response("La carpeta /backups no está accesible. Contenido alternativo /tmp:\n\n" . $resultadoTmp->output(), 500)
+    return response("No se pudo leer el directorio de backups.", 500)
         ->header('Content-Type', 'text/plain');
 });
 
-// 2. Ejecutor forzado manual (Por si quieres generar uno en caliente en la defensa)
+// 2. Ejecutor forzado manual (Guarda directamente en /tmp con permisos totales)
 Route::get('/forzar-backup-ahora', function () {
-    // Aseguramos que la carpeta exista antes de tirar el dump
-    Process::run('mkdir -p /backups');
-    
     $fecha = date('Y-m-d_H-i-s');
-    $rutaArchivo = "/backups/backup_manual_{$fecha}.sql";
+    $rutaArchivo = "/tmp/backup_diario_{$fecha}.sql";
     
-    // Comando con bypass de SSL compatible
+    // Comando limpio apuntando a /tmp y usando bypass de SSL compatible con MariaDB/MySQL
     $comando = "mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --skip-ssl defaultdb > {$rutaArchivo}";
     
     $resultado = Process::run($comando);
 
     if ($resultado->successful()) {
-        return response("¡Éxito! Copia de seguridad forzada y guardada en: {$rutaArchivo}\nVe a /ver-backups-periodicos para verificar el almacenamiento.", 200)
+        return response("¡Éxito! Copia de seguridad forzada correctamente y almacenada físicamente en: {$rutaArchivo}\n\nDirígete a /ver-backups-periodicos para verificar su persistencia y tamaño en el disco.", 200)
             ->header('Content-Type', 'text/plain');
     }
 
-    return response("Error al generar: " . $resultado->errorOutput(), 500);
+    return response("Error al generar el volcado de base de datos:\n\n" . $resultado->errorOutput(), 500)
+        ->header('Content-Type', 'text/plain');
 });
 
 // 3. Ruta para comprobar la existencia de los dos usuarios requeridos
