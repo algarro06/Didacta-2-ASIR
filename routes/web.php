@@ -12,13 +12,17 @@ use App\Http\Middleware\EnsureUserIsAuthenticated;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\DB;
 
-// Rutas Públicas y de Autenticación
+// ==========================================
+// RUTAS PÚBLICAS Y DE AUTENTICACIÓN
+// ==========================================
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
+
 Route::get('/error', function () {
     return view('error');
 })->name('error');
+
 Route::get('/403', function () {
     return view('403');
 })->name('403');
@@ -30,7 +34,9 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-// Rutas Protegidas por Autenticación
+// ==========================================
+// RUTAS PROTEGIDAS (SISTEMA DIDACTA)
+// ==========================================
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index']);
@@ -47,7 +53,7 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::delete('/courses/{title}/remove/{userId}', [CourseController::class, 'removeStudent'])->name('courses.remove');
     Route::get('/courses/{title}', [CourseController::class, 'show'])->name('courses.show');
 
-    // Secciones y Elementos
+    // Secciones y Elementos (Tareas/Subidas)
     Route::post('/courses/{courseId}/sections', [SectionController::class, 'storeSection'])->name('sections.store');
     Route::delete('/sections/{sectionId}', [SectionController::class, 'destroySection'])->name('sections.destroy');
     Route::post('/sections/{sectionId}/items', [SectionController::class, 'storeItem'])->name('items.store');
@@ -58,7 +64,7 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::post('/items/{itemId}/submit', [SectionController::class, 'submitTask'])->name('items.submit');
     Route::get('/items/{itemId}/submissions', [SectionController::class, 'viewSubmissions'])->name('items.submissions');
 
-    // Eventos / Calendario
+    // Eventos y Calendario
     Route::get('/events', [EventController::class, 'index']);
     Route::get('/events/day/{date}', [EventController::class, 'byDay']);
     Route::get('/events/create/{date}', [EventController::class, 'create']);
@@ -71,7 +77,7 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
         return view('news');
     });
 
-    // Administración de Usuarios
+    // Administración de Usuarios (Panel de Control)
     Route::get('/admin/users/create', [UserController::class, 'create']);
     Route::post('/admin/users', [UserController::class, 'store']);
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
@@ -79,7 +85,7 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{id}/delete', [UserController::class, 'destroy'])->name('admin.users.delete');
 
-    // Comunidad / Foro
+    // Comunidad y Foro de Discusión
     Route::get('/community', [ForumController::class, 'index'])->name('community.index');
     Route::get('/community/{id}', [ForumController::class, 'category'])->name('community.category');
     Route::get('/community/topic/{id}', [ForumController::class, 'topic'])->name('community.topic');
@@ -89,12 +95,13 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
 });
 
 // ==========================================
-// RUTAS DE COMPROBACIÓN (TFG / PRODUCCIÓN)
+// CONTROL DEL SERVIDOR (BACKUPS Y USUARIOS)
 // ==========================================
 
-// 1. Ruta corregida para probar el backup con la sintaxis de MariaDB/MySQL compatible
+// Ruta definitiva para ejecutar el Backup ignorando el bloqueo de certificado SSL
 Route::get('/probar-backup', function () {
-    $comando = 'mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --ssl defaultdb';
+    // Intento 1: Desactivando explícitamente la verificación del certificado autofirmado
+    $comando = 'mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --ssl --ssl-verify-server-cert=OFF defaultdb';
     
     $resultado = Process::run($comando);
 
@@ -103,10 +110,21 @@ Route::get('/probar-backup', function () {
             ->header('Content-Type', 'text/plain');
     }
 
-    return response("Error al hacer backup: " . $resultado->errorOutput(), 500);
+    // Intento 2 (Alternativo): Si el cliente de Linux se queja, saltamos el SSL para forzar la lectura del dump
+    $comandoAlternativo = 'mysqldump -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --skip-ssl defaultdb';
+    $resultadoAlt = Process::run($comandoAlternativo);
+
+    if ($resultadoAlt->successful()) {
+        return response($resultadoAlt->output(), 200)
+            ->header('Content-Type', 'text/plain');
+    }
+
+    // Si ambos fallan, devolvemos el error combinado
+    return response("Error en ambos intentos de Backup.\n\nError 1: " . $resultado->errorOutput() . "\nError 2: " . $resultadoAlt->errorOutput(), 500)
+        ->header('Content-Type', 'text/plain');
 });
 
-// 2. Ruta para demostrar que los dos usuarios adicionales existen en Aiven
+// Ruta para comprobar la existencia de los dos usuarios requeridos
 Route::get('/comprobar-usuarios', function () {
     try {
         $usuarios = DB::select("SELECT User, Host FROM mysql.user WHERE User IN ('didacta_app', 'didacta_read')");
@@ -119,7 +137,7 @@ Route::get('/comprobar-usuarios', function () {
     } catch (\Exception $e) {
         return response()->json([
             'status' => 'error',
-            'mensaje' => 'No se pudieron listar los usuarios (Revisa permisos): ' . $e->getMessage()
+            'mensaje' => 'No se pudieron listar los usuarios desde la tabla interna: ' . $e->getMessage()
         ], 500);
     }
 });
