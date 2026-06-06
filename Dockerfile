@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Instalamos dependencias, default-mysql-client y el SERVIDOR SSH
+# Instalamos dependencias y añadimos default-mysql-client para los backups
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -8,15 +8,8 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     default-mysql-client \
-    openssh-server \
     && docker-php-ext-install pdo pdo_mysql zip gd opcache bcmath \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Configuración del servidor SSH (Versión limpia compatible con Render)
-# Hemos asignado la contraseña: DidactaAdmin2026!
-RUN mkdir -p /var/run/sshd && \
-    echo 'root:DidactaAdmin2026!' | chpasswd && \
-    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 RUN a2enmod rewrite
 
@@ -58,4 +51,14 @@ RUN composer install \
 RUN sed -i 's#/var/www/html#/var/www/html/public#g' \
     /etc/apache2/sites-available/000-default.conf
 
-EXPOSE 80 22
+EXPOSE 80
+
+# Comando de arranque corregido (Ejecuta migraciones seguras sin borrar datos reales)
+CMD cp .env.example .env && \
+    chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && \
+    php artisan key:generate --force && \
+    php artisan config:cache && \
+    php artisan route:cache && \
+    php artisan migrate --force && \
+    apache2-foreground
