@@ -12,11 +12,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql zip gd opcache bcmath \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Configuración del servidor SSH (Pon la contraseña que tú quieras)
-RUN mkdir /var/run/sshd && \
-    echo 'root:TuContraseñaSeguraAquí' | chpasswd && \
-    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+# Configuración del servidor SSH (Versión limpia compatible con Render)
+# Hemos asignado la contraseña: DidactaAdmin2026!
+RUN mkdir -p /var/run/sshd && \
+    echo 'root:DidactaAdmin2026!' | chpasswd && \
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 RUN a2enmod rewrite
 
