@@ -1,59 +1,75 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Didacta
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Autores
+Realizado por Álvaro García Rojas, Iván Ortigosa García y Alejandro Gabriel Lomnasan
 
-## About Laravel
+## Descripción
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Proyecto Integrado dedicado a una aplicación web de el Grado de Administración de Sistemas Informáticos en Red. Enfocado en el desarrollo de la educación a través de las tecnologías siempre asegurando la privacidad y seguridad de los usuarios.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Buscamos mejorar la calidad de la educación mediante las tecnologías y también mejorar la comodidad de los profesores a la hora de realizar/mandar/gestionar tareas/temario/eventos..... 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologías utilizadas:
 
-## Learning Laravel
+- Apache HTTP Server
+- HTML, CSS, PHP, JavaScript
+- Docker
+- Framework Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Diagrama E/R
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![Resultado](https://algarro06.github.io/github-assets/BBDDERDIDACTA.drawio.png)
 
-## Laravel Sponsors
+## Tutorial de cómo ejecutarlo de forma local
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<a href="https://algarro06.github.io/github-assets/Ejecucion en local TFG.pdf">
+  📄 Descargar PDF
+</a>
 
-### Premium Partners
+## Breve tutorial de uso de la aplicación
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+<a href="https://algarro06.github.io/github-assets/Breve tutorial de uso de la aplicación con capturas de pantalla y_o material multimedia.pdf">
+  📄 Descargar PDF
+</a>
 
-## Contributing
+## URL donde se encuentra desplegado el proyecto 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+[Didacta](https://didacta.onrender.com/)
 
-## Code of Conduct
+## Bibliografía
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Fuente de PHP: [PostgreSQL PDO Driver - Manual](https://www.php.net/manual/en/ref.pdo-pgsql.php)
 
-## Security Vulnerabilities
+- Fuente de Docker: [Implementar Contenedores Docker en Hosts Internos | LabEx](https://labex.io/es/tutorials/docker-how-to-deploy-docker-containers-on-internal-hosts-394600)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Fuente de Docker: [Docker para principiantes](https://www.datacamp.com/es/tutorial/docker-tutorial)
 
-## License
+- Fuente de HTML: [Manual HTML](https://html.spec.whatwg.org/multipage/)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Fuente de Framework Laravel: [Cómo funciona Laravel](https://raiolanetworks.com/blog/laravel-que-es-y-como-funciona/)
+
+- Fuente de Framework Laravel: [Qué es Laravel](https://axarnet.es/blog/que-es-laravel)
+
+- Fuente de Scripts: [.Bat Tutoriales](https://www.tutorialspoint.com/batch_script/index.htm)
+
+- Fuente de Framework Laravel: [Laravel desde 0](https://www.youtube.com/watch?v=vvGVVyatV_U)
+
+- Fuente de Docker: [Docker Tutorial](https://www.youtube.com/watch?v=CV_Uf3Dq-EU)
+
+- Fuente de JavaScript: [JS para principiantes](https://www.youtube.com/watch?v=RqQ1d1qEWlE)
+
+- Fuente de JavaScript: [JavaScript Manual](https://es.javascript.info/)
+
+- Fuente de CSS: [Guía de CSS](https://eliseovega.github.io/css_generalidades.html)
+
+- Fuente de Laravel: [Empezando con Laravel](https://laravel.com/learn/getting-started-with-laravel)
+
+- Fuente de Ideas: [Páginas educativas](https://manarea.webs.ull.es/12-sitios-web-educativos-imprescindibles-para-los-docentes/)
+
+- Documentación JavaScript: [Documentación](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain)
+
+- Documentación de PHP: [Documentación](https://www.php.net/manual/es/index.php)
+
+## Video explicativo del proyecto 
+
+[Didacta](https://vimeo.com/1199009257?share=copy&fl=sv&fe=ci)
