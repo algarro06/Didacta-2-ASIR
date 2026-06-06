@@ -16,7 +16,7 @@
     @if (!str_contains($current, 'principal'))
         <div class="user-actions animacion">
             <a href="{{ url('/home') }}" class="back-btn">
-                ← Volver al panel
+                <-- Volver al panel
             </a>
         </div>
     @endif
@@ -49,7 +49,7 @@
 
         @if(auth()->check() && auth()->user()->id_role <= 2)
             <a href="{{ url('/admin/users/create') }}" class="admin-btn">
-                Usuarios
+               + Usuarios
             </a>
         @endif
 

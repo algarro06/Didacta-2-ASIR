@@ -22,7 +22,7 @@
                         <b>{{ $event->title }}</b><br>
 
                         <small>
-                            🕒 {{ \Carbon\Carbon::parse($event->start_time)->format('d M H:i') }}
+                            {{ \Carbon\Carbon::parse($event->start_time)->format('d M H:i') }}
                         </small><br>
 
                         <small>{{ $event->type }}</small><br>
@@ -39,7 +39,7 @@
                 <h4>Calendario</h4>
 
                 @php
-                    $days = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+                    $days = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
                 @endphp
 
                 <div class="calendar-grid mb-2">

@@ -48,7 +48,7 @@
 
                             @if($item->type === 'temario')
                                 <a href="{{ asset($item->file_path) }}" target="_blank" class="dark-link">
-                                    📄 {{ $item->title }}
+                                    {{ $item->title }}
                                 </a>
                             @else
                                 <a href="{{ route('items.task', $item->id_item) }}" class="dark-link">
@@ -71,7 +71,6 @@
                                             style="background:none; border:none; color:#dc3545;
                                                    cursor:pointer; font-size:0.85rem;"
                                             onclick="return confirm('¿Eliminar este contenido?')">
-                                        🗑
                                     </button>
                                 </form>
                             @endif

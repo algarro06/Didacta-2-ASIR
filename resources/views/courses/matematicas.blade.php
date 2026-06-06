@@ -62,7 +62,6 @@
                                             style="background:none; border:none; color:#dc3545;
                                                    cursor:pointer; font-size:0.85rem;"
                                             onclick="return confirm('¿Eliminar este contenido?')">
-                                        🗑
                                     </button>
                                 </form>
                             @endif

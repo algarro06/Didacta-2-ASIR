@@ -12,9 +12,6 @@ use App\Http\Middleware\EnsureUserIsAuthenticated;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\DB;
 
-// ==========================================
-// RUTAS PÚBLICAS Y DE AUTENTICACIÓN
-// ==========================================
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
@@ -34,14 +31,10 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-// ==========================================
-// RUTAS PROTEGIDAS (SISTEMA DIDACTA)
-// ==========================================
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index']);
 
-    // Cursos
     Route::get('/courses', [CourseController::class, 'index']);
     Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
     Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
@@ -53,7 +46,6 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::delete('/courses/{title}/remove/{userId}', [CourseController::class, 'removeStudent'])->name('courses.remove');
     Route::get('/courses/{title}', [CourseController::class, 'show'])->name('courses.show');
 
-    // Secciones y Elementos (Tareas/Subidas)
     Route::post('/courses/{courseId}/sections', [SectionController::class, 'storeSection'])->name('sections.store');
     Route::delete('/sections/{sectionId}', [SectionController::class, 'destroySection'])->name('sections.destroy');
     Route::post('/sections/{sectionId}/items', [SectionController::class, 'storeItem'])->name('items.store');
@@ -64,7 +56,6 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::post('/items/{itemId}/submit', [SectionController::class, 'submitTask'])->name('items.submit');
     Route::get('/items/{itemId}/submissions', [SectionController::class, 'viewSubmissions'])->name('items.submissions');
 
-    // Eventos y Calendario
     Route::get('/events', [EventController::class, 'index']);
     Route::get('/events/day/{date}', [EventController::class, 'byDay']);
     Route::get('/events/create/{date}', [EventController::class, 'create']);
@@ -77,7 +68,6 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
         return view('news');
     });
 
-    // Administración de Usuarios (Panel de Control)
     Route::get('/admin/users/create', [UserController::class, 'create']);
     Route::post('/admin/users', [UserController::class, 'store']);
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
@@ -85,7 +75,6 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{id}/delete', [UserController::class, 'destroy'])->name('admin.users.delete');
 
-    // Comunidad y Foro de Discusión
     Route::get('/community', [ForumController::class, 'index'])->name('community.index');
     Route::get('/community/{id}', [ForumController::class, 'category'])->name('community.category');
     Route::get('/community/topic/{id}', [ForumController::class, 'topic'])->name('community.topic');
@@ -94,11 +83,6 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::post('/community/{id}/post/store', [ForumController::class, 'storePost'])->name('community.post.store');
 });
 
-// ==========================================
-// SECCIÓN TFG: AUDITORÍA DE BACKUPS Y USUARIOS
-// ==========================================
-
-// 1. EL VERIFICADOR DEL HISTORIAL 
 Route::get('/ver-backups-periodicos', function () {
     $resultado = Process::run('ls -lh /tmp');
 
@@ -111,12 +95,10 @@ Route::get('/ver-backups-periodicos', function () {
         ->header('Content-Type', 'text/plain');
 });
 
-// 2. EJECUTOR DE COPIAS DE SEGURIDAD (CORREGIDO PARA ELIMINAR BLOQUEOS TLS Y FLAGS INCOMPATIBLES)
 Route::get('/forzar-backup-ahora', function () {
     $fecha = date('Y-m-d_H-i-s');
     $rutaArchivo = "/tmp/backup_manual_{$fecha}.sql";
     
-    // Comando universal sin flags problemáticos de versión y omitiendo la validación estricta del certificado
     $comando = "mysqldump --opt -h mysql-11f4bf50-pepito11ortiz-49e6.i.aivencloud.com -P 19185 -u avnadmin -pAVNS_6TysVsPqL3k1qI1_UcY --skip-ssl defaultdb > {$rutaArchivo}";
     
     $resultado = Process::run($comando);
@@ -130,12 +112,10 @@ Route::get('/forzar-backup-ahora', function () {
         ->header('Content-Type', 'text/plain');
 });
 
-// También mapeamos 'probar-backup' por si accedes desde ese enlace que sale en tus capturas
 Route::get('/probar-backup', function() {
     return redirect('/forzar-backup-ahora');
 });
 
-// 3. COMPROBACIÓN DE USUARIOS
 Route::get('/comprobar-usuarios', function () {
     try {
         $usuarios = DB::select("SELECT User, Host FROM mysql.user WHERE User IN ('didacta_app', 'didacta_read')");

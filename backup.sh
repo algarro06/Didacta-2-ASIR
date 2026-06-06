@@ -37,5 +37,5 @@ do
 
     # Esperar 24 horas (86400 segundos) para el siguiente backup
     echo "Esperando 24 horas para el próximo ciclo..."
-    sleep 60
+    sleep 86400
 done

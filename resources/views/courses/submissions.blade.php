@@ -1,7 +1,7 @@
 @include('includes.header')
 <link rel="stylesheet" href="{{ asset('recursos/css/principal.css') }}">
 <div class="curso-header">
-    <h1>📬 Entregas — {{ $item->title }}</h1>
+    <h1>Entregas — {{ $item->title }}</h1>
 </div>
 <div class="curso-wrapper">
     @if($submissions->isEmpty())
@@ -31,7 +31,7 @@
                     <td style="padding:10px; border:1px solid #ccc; text-align:center;">
                         <a href="{{ asset($sub->file_path) }}" target="_blank"
                            style="color:#4a6fa5; font-weight:bold;">
-                            📥 Descargar
+                            Descargar
                         </a>
                     </td>
                 </tr>
