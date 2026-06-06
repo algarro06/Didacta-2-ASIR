@@ -16,7 +16,7 @@
     @if (!str_contains($current, 'principal'))
         <div class="user-actions animacion">
             <a href="{{ url('/home') }}" class="back-btn">
-                <-- Volver al panel
+                ← Volver al panel
             </a>
         </div>
     @endif
